@@ -3,6 +3,7 @@ package com.manuel.curso.springboot.webapp.springboot_web.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.manuel.curso.springboot.webapp.springboot_web.models.User;
 import com.manuel.curso.springboot.webapp.springboot_web.models.DTO.ParamDto;
 
 import java.util.HashMap;
@@ -10,6 +11,9 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -30,9 +34,17 @@ public class PathVariableController {
     Map<String, Object> json = new HashMap<>();
     json.put("product", product);
     json.put("id", id);
-    
+
     return json;
-    }  
+  }
+    
+  @PostMapping("/create")
+  public User create(@RequestBody User user) {
+      //TODO: process POST request usuaro save
+      user.setName(user.getName().toUpperCase());
+      return user;
+  }
+  
 }
   
 
