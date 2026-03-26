@@ -7,8 +7,10 @@ import com.manuel.curso.springboot.webapp.springboot_web.models.User;
 import com.manuel.curso.springboot.webapp.springboot_web.models.DTO.ParamDto;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +21,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
+
+
 @RestController
 @RequestMapping("api/var")
 public class PathVariableController {
+
+  @Value("${config.username}")
+  private String username;
+
+  @Value("${config.message}")
+  private String message;
+
+  @Value("${config.listOfValues}")
+  private List<String> listOfValues;
+  
+  @Value("${config.code}")
+  private Integer code;
+  
+  @Value("#{'${config.listOfValues}'.toUpperCase().split(',')}")
+  private List<String> valueList;
+
+  @Value("#{'${config.listOfValues}'.toUpperCase()}")
+  private String valueString;
+
+  @Value("#{${config.valuesMap}}")
+  private Map<String, Object> valuesMap;
+
+  @Value("#{${config.valuesMap}.product}")
+  private String product;
+
+  @Value("#{${config.valuesMap}.price}")
+  private Long price;
+
+
   @GetMapping("/baz/{message}")
   public ParamDto baz(@PathVariable() String message) {
     ParamDto param = new ParamDto();
@@ -40,10 +73,26 @@ public class PathVariableController {
     
   @PostMapping("/create")
   public User create(@RequestBody User user) {
-      //TODO: process POST request usuaro save
-      user.setName(user.getName().toUpperCase());
-      return user;
+    //TODO: process POST request usuario save
+    user.setName(user.getName().toUpperCase());
+    return user;
   }
+  
+  @GetMapping("/values")
+  public Map<String, Object> values() {
+    Map<String, Object> json = new HashMap<>();
+    json.put("username", username);
+    json.put("code", code);
+    json.put("message", message);
+    json.put("listOfValues", listOfValues);
+    json.put("valueList", valueList);
+    json.put("valueString", valueString);
+    json.put("valuesMap", valuesMap);
+    json.put("product", product);
+    json.put("price", price);
+    return json;
+  }
+  
   
 }
   
