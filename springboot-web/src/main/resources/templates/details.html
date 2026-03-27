@@ -15,5 +15,19 @@
       <!-- <li th:text="${name}"></li>
       <li th:text="${lastname}"></li> -->
     </ul>
+    <a th:href="@{/list}">Ver listado</a><br />
+    <a th:href="@{'/api/params/foo?message=' + ${title}}"> Ver Mensaje</a><br />
+    <a th:href="@{/api/params/foo(message='Hola Que tal Festival')}">
+      Ver Mensaje 2</a
+    ><br />
+    <a th:href="@{/api/params/bar(text='Hola Que tal Festival', code=32323)}">
+      Ver Bar Mix 2 param </a
+    ><br />
+    <a th:href="@{/api/var/baz/Algún Mensaje}"> Path Variable </a><br />
+    <a th:href="@{'/api/var/baz/' + ${title}}"> Path Variable 2 con variable</a
+    ><br />
+    <a th:href="@{'/api/var/baz/' + 'Otro Mensaje'}">
+      Path Variable 3 con string</a
+    ><br />
   </body>
 </html>
