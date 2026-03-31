@@ -3,13 +3,22 @@ package com.manuel.springboot.di.app.springboot_di.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.manuel.springboot.di.app.springboot_di.models.Product;
-import com.manuel.springboot.di.app.springboot_di.repositories.ProductRepository;
+// import com.manuel.springboot.di.app.springboot_di.repositories.ProductRepositoryImpl;
+import com.manuel.springboot.di.app.springboot_di.repositories.ProductoRepository;
 
-public class ProductService {
+@Component
+public class ProductServiceImpl implements ProductoService{
 
-  private ProductRepository repository = new ProductRepository();
+  @Autowired
+  // private ProductRepositoryImpl repository = new ProductRepositoryImpl();
+  // private ProductRepositoryImpl repository; Inyectando con el @Component
+  private ProductoRepository repository; // Inyectando por la Interface
 
+  @Override
   public List<Product> findAll() {
     return repository.findAll().stream().map(p -> {
       Double priceTax = p.getPrice() * 1.25d;
@@ -20,6 +29,7 @@ public class ProductService {
     }).collect(Collectors.toList());
   }
 
+  @Override
   public Product findById(Long id) {
     return repository.findById(id);
   }

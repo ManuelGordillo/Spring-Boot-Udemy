@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manuel.springboot.di.app.springboot_di.models.Product;
-import com.manuel.springboot.di.app.springboot_di.services.ProductService;
+// import com.manuel.springboot.di.app.springboot_di.services.ProductServiceImpl;
+import com.manuel.springboot.di.app.springboot_di.services.ProductoService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api")
 public class SomeController {
 
-  private ProductService service = new ProductService();
+  @Autowired
+  // private ProductServiceImpl service; inyeccion por el @Component
+  private ProductoService service; //inyectando mediante la interface
+  // private ProductServiceImpl service = new ProductServiceImpl(); sin Autowired
 
 
   @GetMapping

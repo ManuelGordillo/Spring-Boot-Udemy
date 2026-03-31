@@ -40,11 +40,9 @@ public class Product implements Cloneable{
 
   @Override
   public Object clone() {
-    // TODO Auto-generated method stub
     try {
       return super.clone();
     } catch (CloneNotSupportedException e) {
-      // TODO Auto-generated catch block
       return new Product(id, name, price);
     }
   }
