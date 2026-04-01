@@ -1,12 +1,13 @@
-package com.manuel.springboot.di.app.springboot_di.services;
+package com.manuel.springboot.di.app.springboot_di.repositories;
 
 import java.util.List;
 
 import com.manuel.springboot.di.app.springboot_di.models.Product;
 
-public interface ProductoService {
+public interface ProductRepository {
+
   List<Product> findAll();
 
   Product findById(Long id);
-
+  
 }

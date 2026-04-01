@@ -3,20 +3,33 @@ package com.manuel.springboot.di.app.springboot_di.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+// import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+// import org.springframework.context.annotation.Primary;
+// import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.manuel.springboot.di.app.springboot_di.models.Product;
 // import com.manuel.springboot.di.app.springboot_di.repositories.ProductRepositoryImpl;
-import com.manuel.springboot.di.app.springboot_di.repositories.ProductoRepository;
+import com.manuel.springboot.di.app.springboot_di.repositories.ProductRepository;
 
-@Component
-public class ProductServiceImpl implements ProductoService{
+@Service
+public class ProductServiceImpl implements ProductService {
 
-  @Autowired
+  // @Autowired
   // private ProductRepositoryImpl repository = new ProductRepositoryImpl();
   // private ProductRepositoryImpl repository; Inyectando con el @Component
-  private ProductoRepository repository; // Inyectando por la Interface
+  private ProductRepository repository; // Inyectando por la Interface
+  // @Autowired
+  // public void setRepository(ProductoRepository repository) {
+  //   this.repository = repository;
+  // } implementacion con setter
+
+
+
+  public ProductServiceImpl(@Qualifier("productFoo") ProductRepository repository) {
+    this.repository = repository;
+  } // inyectando la implementacion con el econstructor
 
   @Override
   public List<Product> findAll() {
@@ -29,8 +42,10 @@ public class ProductServiceImpl implements ProductoService{
     }).collect(Collectors.toList());
   }
 
+
   @Override
   public Product findById(Long id) {
     return repository.findById(id);
   }
+
 }
